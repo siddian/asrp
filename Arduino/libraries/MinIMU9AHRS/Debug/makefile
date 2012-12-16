@@ -4,7 +4,7 @@
 
 -include ../makefile.init
 
-RM := rm -f
+RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -46,32 +46,41 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-libL3G.lss \
+MinIMU9AHRS.lss \
+
+FLASH_IMAGE += \
+MinIMU9AHRS.hex \
 
 
 # All Target
-all: libL3G.a secondary-outputs
+all: MinIMU9AHRS.elf secondary-outputs
 
 # Tool invocations
-libL3G.a: $(OBJS)
+MinIMU9AHRS.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: AVR Archiver'
-	avr-ar -r  "libL3G.a" $(OBJS) $(LIBS)
+	@echo 'Invoking: AVR C++ Linker'
+	avr-g++ -Wl,-Map,MinIMU9AHRS.map,--cref -lm -L"/home/siddian/Dropbox/ArduinoWorkspace/arduino_core/328P_16MHz" -L"/home/siddian/Dropbox/ArduinoWorkspace/Wire/328P_16MHz" -L"/home/siddian/src/asrp/Arduino/libraries/L3G/Debug" -L"/home/siddian/src/asrp/Arduino/libraries/LSM303/328P_16MHz" -mmcu=atmega328p -o "MinIMU9AHRS.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-libL3G.lss: libL3G.a
+MinIMU9AHRS.lss: MinIMU9AHRS.elf
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S libL3G.a  >"libL3G.lss"
+	-avr-objdump -h -S MinIMU9AHRS.elf  >"MinIMU9AHRS.lss"
+	@echo 'Finished building: $@'
+	@echo ' '
+
+MinIMU9AHRS.hex: MinIMU9AHRS.elf
+	@echo 'Create Flash image (ihex format)'
+	-avr-objcopy -R .eeprom -O ihex MinIMU9AHRS.elf  "MinIMU9AHRS.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(ARCHIVES)$(LSS)$(CPP_DEPS)$(S_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS) libL3G.a
+	-$(RM) $(OBJS)$(C_DEPS)$(FLASH_IMAGE)$(ELFS)$(LSS)$(S_DEPS)$(CXX_DEPS)$(S_UPPER_DEPS)$(C++_DEPS)$(ASM_DEPS)$(CC_DEPS)$(CPP_DEPS)$(C_UPPER_DEPS) MinIMU9AHRS.elf
 	-@echo ' '
 
-secondary-outputs: $(LSS)
+secondary-outputs: $(LSS) $(FLASH_IMAGE)
 
 .PHONY: all clean dependents
 .SECONDARY:
