@@ -441,7 +441,7 @@ void Epaper::updateImage(EpaperImage &newImage) {
 	writeInvImage(mNewImage);
 	std::cout << "stage 4" << std::endl;
 	writeImage(mNewImage);
-//	writeImage(mNewImage);//optional!
+	writeImage(mNewImage);//optional!
 
 	memcpy(&mOldImage, &mNewImage, sizeof(EpaperImage));
 
