@@ -23,7 +23,8 @@ int main (void)
     exit(1);
   }
   printf("starting...\n");
-  wiringPiSetupSys();
+  //wiringPiSetupSys();
+  wiringPiSetup();
 
   uint8_t add = 0;
   for (;;) {
@@ -31,7 +32,8 @@ int main (void)
     add = ++add % 26;
     wiringPiSPIDataRW (channel, outbuffer, bufsize);
     printf("read from buffer: %c\n", outbuffer[0]);
-    delayMicroseconds(500);
+    //delayMicroseconds(500);
+    delay(500);
   }
 
   return 0 ;

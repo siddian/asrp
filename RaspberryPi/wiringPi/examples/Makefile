@@ -38,7 +38,8 @@ LDLIBS    = -lwiringPi
 SRC	=	test1.c test2.c speed.c lcd.c wfi.c		\
 		piface.c gertboard.c nes.c			\
 		pwm.c tone.c servo.c				\
-		delayTest.c serialRead.c okLed.c
+		delayTest.c serialRead.c okLed.c		\
+		spi.c switch.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -105,6 +106,13 @@ servo:	servo.o
 	@echo [link]
 	@$(CC) -o $@ servo.o $(LDFLAGS) $(LDLIBS)
 
+spi:	spi.o
+	@echo [link]
+	@$(CC) -o $@ spi.o $(LDFLAGS) $(LDLIBS)
+
+switch:	switch.o
+	@echo [link]
+	@$(CC) -o $@ switch.o $(LDFLAGS) $(LDLIBS)
 
 .c.o:
 	@echo [CC] $<
