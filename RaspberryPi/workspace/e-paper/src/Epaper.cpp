@@ -422,26 +422,26 @@ void Epaper::updateImage(EpaperImage &newImage) {
 	//TODO: when is this used?
 //	double stagetime = getTempCompensation() * 630;//in [ms]
 
-	std::cout << "stage 1" << std::endl;
-	writeInvImage(mOldImage);
-	for (unsigned x = 0; x < ResX; x++) {
-		for (unsigned y = 0; y < ResY; y++) {
-			uint8_t pixel = mOldImage.getPixel(x,y);
-			if (pixel == Px_Black || pixel == Px_NC) {
-				mWhiteImage.setPixel(x,y,Px_NC);
-			}
-			if (pixel == Px_White) {
-				mWhiteImage.setPixel(x,y,Px_White);
-			}
-		}
-	}
-	std::cout << "stage 2" << std::endl;
-	writeImage(mWhiteImage);
+//	std::cout << "stage 1" << std::endl;
+//	writeInvImage(mOldImage);
+//	for (unsigned x = 0; x < ResX; x++) {
+//		for (unsigned y = 0; y < ResY; y++) {
+//			uint8_t pixel = mOldImage.getPixel(x,y);
+//			if (pixel == Px_Black || pixel == Px_NC) {
+//				mWhiteImage.setPixel(x,y,Px_NC);
+//			}
+//			if (pixel == Px_White) {
+//				mWhiteImage.setPixel(x,y,Px_White);
+//			}
+//		}
+//	}
+//	std::cout << "stage 2" << std::endl;
+//	writeImage(mWhiteImage);
 	std::cout << "stage 3" << std::endl;
 	writeInvImage(mNewImage);
 	std::cout << "stage 4" << std::endl;
 	writeImage(mNewImage);
-	writeImage(mNewImage);//optional!
+//	writeImage(mNewImage);//optional!
 
 	memcpy(&mOldImage, &mNewImage, sizeof(EpaperImage));
 
