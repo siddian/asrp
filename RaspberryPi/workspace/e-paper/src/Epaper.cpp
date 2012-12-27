@@ -26,13 +26,14 @@ Epaper::Epaper() {
 	mBUSYPin = 5;
 	mDCPin = 6;
 
-	if (wiringPiSPISetup (mChannel, mFreq) < 0) {
-		mRunning = false;
-		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
-	}
 	if (wiringPiSetup() < 0) {
 		mRunning = false;
 		fprintf(stderr, "Wiring Setup failed: %s\n", strerror (errno));
+	}
+
+	if (wiringPiSPISetup (mChannel, mFreq) < 0) {
+		mRunning = false;
+		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
 	}
 
 	if (mRunning) {
