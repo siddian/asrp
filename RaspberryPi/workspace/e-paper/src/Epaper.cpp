@@ -61,7 +61,7 @@ Epaper::~Epaper() {
 }
 
 void Epaper::waitBusy() {
-	delayMicroseconds(2);//maybe the busy pin stuff does not work!
+//	delayMicroseconds(2);//maybe the busy pin stuff does not work!
 //	while (digitalRead(mBUSYPin) < 1) {
 //		std::cout << "waiting ... " << millis() << std::endl;
 //		delayMicroseconds(1);
@@ -94,9 +94,9 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     for (unsigned i = 0; i < datasize; i++) {
         msg[0] = data[i];
         wiringPiSPIDataRW (mChannel, msg, 1);
-    	digitalWrite(mCSPin, HIGH);
-    	waitBusy();
-    	digitalWrite(mCSPin, LOW);
+//    	digitalWrite(mCSPin, HIGH);
+//    	waitBusy();
+//    	digitalWrite(mCSPin, LOW);
     }
 
 //    //TODO: or like this:
