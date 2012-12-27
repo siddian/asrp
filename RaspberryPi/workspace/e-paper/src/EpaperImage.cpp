@@ -94,10 +94,10 @@ uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
 	unsigned i = 0;
 	for (int x = 0; x < ResX-1; x = x+8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
-		mInvOddData[i] = mImageData[y][x] << 6;
-		mInvOddData[i] |= mImageData[y][x+2] << 4;
-		mInvOddData[i] |= mImageData[y][x+4] << 2;
-		mInvOddData[i] |= mImageData[y][x+6];
+		mInvOddData[i] = mInvImageData[y][x] << 6;
+		mInvOddData[i] |= mInvImageData[y][x+2] << 4;
+		mInvOddData[i] |= mInvImageData[y][x+4] << 2;
+		mInvOddData[i] |= mInvImageData[y][x+6];
 		i++;
 	}
 	return mInvOddData;
