@@ -27,12 +27,12 @@ Epaper::Epaper() {
 	mDCPin = 6;
 
 	if (wiringPiSPISetup (mChannel, mFreq) < 0) {
-		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
 		mRunning = false;
+		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
 	}
 	if (wiringPiSetup() < 0) {
-		fprintf(stderr, "Wiring Setup failed: %s\n", strerror (errno));
 		mRunning = false;
+		fprintf(stderr, "Wiring Setup failed: %s\n", strerror (errno));
 	}
 
 	if (mRunning) {
@@ -84,6 +84,9 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 //    for (unsigned i = 0; i < datasize; i++) {
 //        msg[0] = data[i];
 //        wiringPiSPIDataRW (mChannel, msg, 1);
+//		while (digitalRead(mBUSYPin) > 0) {
+//			delayMicroseconds(1);
+//		}
 //    }
 
     //TODO: or like this:
@@ -107,14 +110,14 @@ void Epaper::powerOn() {
 	//put 50% duty cycle on the pwm output
     pwmWrite(mPWMPin, 512);
     //for at least 5ms
-    delayMicroseconds(5000);
+    delay(5);
     pwmWrite(mPWMPin, 0);
     //enable the display
     digitalWrite(mENPin, HIGH);
     //let the PWm continue for additional 10ms
     pwmWrite(mPWMPin, 512);
-    //for at least 5ms
-    delayMicroseconds(10000);
+    //for at least 10ms
+    delay(10);
     pwmWrite(mPWMPin, 0);
     //before switching on the CS pin
     digitalWrite(mCSPin, HIGH);
@@ -124,25 +127,28 @@ void Epaper::powerOn() {
     digitalWrite(mRSTPin, HIGH);
     pwmWrite(mPWMPin, 512);
     //for at least 5ms
-    delayMicroseconds(5000);
+    delay(5);
     pwmWrite(mPWMPin, 0);
     //before switching it off
     digitalWrite(mRSTPin, LOW);
     pwmWrite(mPWMPin, 512);
     //for at least 5ms
-    delayMicroseconds(5000);
+    delay(5);
     pwmWrite(mPWMPin, 0);
     //before switching it on again
     digitalWrite(mRSTPin, HIGH);
     pwmWrite(mPWMPin, 512);
     //for at least 5ms
-    delayMicroseconds(5000);
+    delay(5);
     pwmWrite(mPWMPin, 0);
 }
 
 //defined on page 19
 //COG = Chip on glass
 void Epaper::initCOGDriver() {
+	if (!mRunning) {
+		return;
+	}
 	//helper variables
 	uint8_t data[16];
 
@@ -203,7 +209,7 @@ void Epaper::initCOGDriver() {
 	//start pwm signal
     pwmWrite(mPWMPin, 512);
     //for at least 30ms
-    delayMicroseconds(30000);
+    delayM(30);
     pwmWrite(mPWMPin, 0);
 
 	//start chargepump negative V
@@ -212,7 +218,7 @@ void Epaper::initCOGDriver() {
 	sendData(0x05, data, 1);
 
 	//delay for 30ms
-    delayMicroseconds(30000);
+    delay(30);
 
 	//start chargepump vcom driver to on
 	memset(data, 0, 16);
@@ -220,7 +226,7 @@ void Epaper::initCOGDriver() {
 	sendData(0x05, data, 1);
 
 	//delay for 30ms
-    delayMicroseconds(30000);
+    delay(30);
 
 	//output enable to disable
 	memset(data, 0, 16);
@@ -315,7 +321,7 @@ void Epaper::powerOff() {
 	//TODO:
 //	writeImage(nothing);
 	writeLine(dummyLine);
-	delayMicroseconds(25000);
+	delay(25);
 	//we do not us a border so skip this:
 	//border = 0
 //	delayMicroseconds(300000);//between 200 & 300 ms
@@ -347,7 +353,7 @@ void Epaper::powerOff() {
 	sendData(0x02, data, 1);
 
 	//wait for it for 120ms
-	delayMicroseconds(120000);
+	delay(120);
 
 	//power off all chargepumps
 	memset(data, 0x00, 16);
@@ -364,7 +370,7 @@ void Epaper::powerOff() {
 	sendData(0x04, data, 1);
 
 	//wait for it for 40ms
-	delayMicroseconds(40000);
+	delay(40);
 
 	//discharge internal
 	memset(data, 0x00, 16);
@@ -372,7 +378,7 @@ void Epaper::powerOff() {
 	sendData(0x04, data, 1);
 
 	//wait for it for 40ms
-	delayMicroseconds(40000);
+	delay(40);
 
 	//discharge internal
 	memset(data, 0x00, 16);
@@ -385,7 +391,7 @@ void Epaper::powerOff() {
 	digitalWrite(mENPin, LOW);
 	digitalWrite(mDCPin, HIGH);
 	//wait for it for 150ms
-	delayMicroseconds(150000);
+	delay(150);
 	digitalWrite(mDCPin, LOW);
 
 }
@@ -397,6 +403,9 @@ double Epaper::getTempCompensation() {
 
 //defined page 28
 void Epaper::updateImage(EpaperImage &newImage) {
+	if (!mRunning) {
+		return;
+	}
 	memcpy(&mNewImage, &newImage, sizeof(EpaperImage));
 
 	std::cout << "powering on" << std::endl;
