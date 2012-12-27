@@ -396,6 +396,8 @@ double Epaper::getTempCompensation() {
 
 //defined page 28
 void Epaper::updateImage(EpaperImage &newImage) {
+	memcpy(&mNewImage, &newImage, sizeof(EpaperImage));
+
 	powerOn();
 	initCOGDriver();
 	//TODO: when is this used?
@@ -418,5 +420,8 @@ void Epaper::updateImage(EpaperImage &newImage) {
 	writeInvImage(mNewImage);
 	writeImage(mNewImage);
 //	writeImage(mNewImage);//optional!
+
+	memcpy(&mOldImage, &mNewImage, sizeof(EpaperImage));
+
 	powerOff();
 }
