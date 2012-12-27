@@ -13,12 +13,12 @@
 EpaperImage::EpaperImage() {
 	for (unsigned x = 0; x < ResX; x++) {
 		for (unsigned y = 0; y < ResY; y++) {
-			mImageData[x][y] = Px_White;
+			mImageData[y][x] = Px_White;
 		}
 	}
 	for (unsigned x = 0; x < ResX; x++) {
 		for (unsigned y = 0; y < ResY; y++) {
-			mInvImageData[x][y] = Px_Black;
+			mInvImageData[y][x] = Px_Black;
 		}
 	}
 //	memset(mImageData, Px_White, ResX*ResY);
