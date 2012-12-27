@@ -193,8 +193,8 @@ void EpaperImage::fillRect(uint32_t startx, uint32_t starty, uint32_t endx, uint
 	if (starty > endy) {
 		starty = endy;
 	}
-	for (unsigned x = startx; startx < endx; x++) {
-		for (unsigned y = starty; starty < endy; y++) {
+	for (unsigned y = starty; y < endy; y++) {
+		for (unsigned x = startx; x < endx; x++) {
 			mImageData[y][x] = color;
 			mInvImageData[y][x] = invcolor;
 		}
