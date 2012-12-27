@@ -1,0 +1,18 @@
+/*
+ * EpaperImage.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "EpaperImage.hpp"
+
+EpaperImage::EpaperImage() {
+	// TODO Auto-generated constructor stub
+
+}
+
+EpaperImage::~EpaperImage() {
+	// TODO Auto-generated destructor stub
+}
+

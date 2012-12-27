@@ -1,0 +1,14 @@
+/*
+ * Epaper.hpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#ifndef EPAPER_HPP_
+#define EPAPER_HPP_
+
+class Epaper {
+};
+
+#endif /* EPAPER_HPP_ */

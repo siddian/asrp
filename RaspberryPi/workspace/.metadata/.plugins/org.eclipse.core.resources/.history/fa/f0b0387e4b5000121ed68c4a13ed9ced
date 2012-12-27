@@ -1,0 +1,23 @@
+/*
+ * EpaperImage.hpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#ifndef EPAPERIMAGE_HPP_
+#define EPAPERIMAGE_HPP_
+
+#define ResX 264
+#define ResY 176
+
+class EpaperImage {
+public:
+	EpaperImage();
+	virtual ~EpaperImage();
+
+	uint8_t* getInterlacedDataLine();
+
+};
+
+#endif /* EPAPERIMAGE_HPP_ */

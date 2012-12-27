@@ -1,0 +1,44 @@
+/*
+ * EpaperImage.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "EpaperImage.hpp"
+
+EpaperImage::EpaperImage() {
+
+}
+
+EpaperImage::~EpaperImage() {
+
+}
+
+uint8_t* EpaperImage::getScanLineData(uint32_t y) {
+
+}
+uint8_t* EpaperImage::getEvenLineData(uint32_t y) {
+
+}
+uint8_t* EpaperImage::getOddLineData(uint32_t y) {
+
+}
+
+uint8_t* EpaperImage::getInvEvenLineData(uint32_t y) {
+
+}
+uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
+
+}
+
+uint8_t* EpaperImage::getInterlacedDataLine(uint32_t y) {
+
+}
+uint8_t* EpaperImage::getInvInterlacedDataLine(uint32_t y) {
+
+}
+
+void EpaperImage::setPixel(uint32_t x, uint32_t y, uint8_t color) {
+
+}

@@ -1,0 +1,36 @@
+/*
+ * Epaper.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "Epaper.hpp"
+
+#include "wiringPi.h"
+#include <errno.h>
+
+Epaper::Epaper() {
+	mRunning = true;
+	//TODO: read this from a config file
+	mChannel = 0;
+	mFreq = 8000000;
+	mCSPin = 3;
+	mENPin = 2;
+
+	if (wiringPiSPISetup (mChannel, mFreq) < 0) {
+		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
+		mRunning = false;
+	}
+	wiringPiSetup();
+
+	pinMode(mCSPin, OUTPUT);
+	digitalWrite(mCSPin, HIGH);
+
+	pinMode(mENPin, OUTPUT);
+	digitalWrite(mENPin, LOW);
+}
+
+Epaper::~Epaper() {
+
+}

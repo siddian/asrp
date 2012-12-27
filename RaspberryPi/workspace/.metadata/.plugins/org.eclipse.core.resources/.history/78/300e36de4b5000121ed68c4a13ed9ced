@@ -1,0 +1,28 @@
+/*
+ * EpaperImage.hpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#ifndef EPAPERIMAGE_HPP_
+#define EPAPERIMAGE_HPP_
+
+#define ResX 264
+#define ResY 176
+
+class EpaperImage {
+	uint8_t ImageData[ResY][ResX];
+private:
+	uint8_t* getScanLineData(uint32_t y);
+	uint8_t* getEvenLineData(uint32_t y);
+	uint8_t* getOddLineData(uint32_t y);
+public:
+	EpaperImage();
+	virtual ~EpaperImage();
+
+	uint8_t* getInterlacedDataLine(uint32_t y);
+
+};
+
+#endif /* EPAPERIMAGE_HPP_ */

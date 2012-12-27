@@ -1,0 +1,29 @@
+/*
+ * Epaper.hpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#ifndef EPAPER_HPP_
+#define EPAPER_HPP_
+
+class Epaper {
+	//is everything ok?
+	bool mRunning;
+	//seems like the raspberry has two channels?
+	int mChannel;
+	//frequency of SPI bus
+	int mFreq;
+	//pin number of the CS pin
+	int mCSPin;
+	//pin number of Enable pin
+	int mENPin;
+private:
+	void sendData(uint8_t registerIndex, uint8_t* data, size_t datasize);
+public:
+	Epaper();
+	virtual ~Epaper();
+};
+
+#endif /* EPAPER_HPP_ */

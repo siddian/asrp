@@ -1,0 +1,109 @@
+/*
+ * Epaper.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "Epaper.hpp"
+
+#include "wiringPi.h"
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+Epaper::Epaper() {
+	mRunning = true;
+	//TODO: read this from a config file
+	mChannel = 0;
+	mFreq = 8000000;
+	mPWMPin = 1;//only available hardware PWM pin!
+	mENPin = 2;
+	mCSPin = 3;
+	mRSTPin = 4;
+
+	if (wiringPiSPISetup (mChannel, mFreq) < 0) {
+		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
+		mRunning = false;
+	}
+	if (wiringPiSetup() < 0) {
+		fprintf(stderr, "Wiring Setup failed: %s\n", strerror (errno));
+		mRunning = false;
+	}
+
+	if (mRunning) {
+		pinMode(mENPin, OUTPUT);
+		digitalWrite(mENPin, LOW);
+
+		pinMode(mCSPin, OUTPUT);
+		digitalWrite(mCSPin, HIGH);
+
+		pinMode(mRSTPin, OUTPUT);
+		digitalWrite(mRSTPin, LOW);
+
+		pinMode (mPWMPin, PWM_OUTPUT);
+	    pwmWrite(mPWMPin, 0);
+	}
+}
+
+Epaper::~Epaper() {
+
+}
+
+//defined page 15
+void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
+	//helper variables
+	uint8_t msg[1] = {0x70};
+
+	//lets start
+	digitalWrite(mCSPin, HIGH);
+	delayMicroseconds(10);
+	digitalWrite(mCSPin, LOW);
+	//header
+    wiringPiSPIDataRW (mChannel, msg, 1);
+    //index
+    msg[0] = registerIndex;
+    wiringPiSPIDataRW (mChannel, msg, 1);
+    //switch enable off and on again
+	digitalWrite(mCSPin, HIGH);
+	delayMicroseconds(10);//TODO: at least 10 us!
+	digitalWrite(mCSPin, LOW);
+	//second header
+    msg[0] = 0x72;
+    wiringPiSPIDataRW (mChannel, msg, 1);
+	//now send the actual data!
+//    for (unsigned i = 0; i < datasize; i++) {
+//        msg[0] = data[i];
+//        wiringPiSPIDataRW (mChannel, msg, 1);
+//    }
+
+    //TODO: or like this:
+    wiringPiSPIDataRW (mChannel, data, datasize);
+
+	digitalWrite(mCSPin, HIGH);
+}
+
+
+//defined page 18
+void Epaper::powerOn() {
+	if (!mRunning) {
+		return;
+	}
+	//make sure we meet start conditions
+	digitalWrite(mENPin, LOW);
+	digitalWrite(mRSTPin, LOW);
+	digitalWrite(mCSPin, LOW);
+	digitalWrite(mENPin, LOW);
+
+	//put 50% duty cycle on the pwm output
+    pwmWrite(mPWMPin, 512);
+    //for at least 5ms
+    delayMicroseconds(5000);
+    //enable the display
+    digitalWrite(mENPin, HIGH);
+    //let the PWm continue for additional 10ms
+    delayMicroseconds(10000);
+    //before switching on the CS pin
+    digitalWrite(mCSPin, HIGH);
+}

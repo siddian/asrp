@@ -1,0 +1,17 @@
+/*
+ * Epaper.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "Epaper.hpp"
+
+
+Epaper::Epaper() {
+
+}
+
+Epaper::~Epaper() {
+
+}

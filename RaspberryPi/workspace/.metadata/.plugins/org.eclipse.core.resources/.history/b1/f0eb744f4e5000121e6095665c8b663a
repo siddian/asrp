@@ -1,0 +1,72 @@
+/*
+ * EpaperImage.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "EpaperImage.hpp"
+#include <stddef.h>
+#include <string.h>
+
+EpaperImage::EpaperImage() {
+
+}
+
+EpaperImage::~EpaperImage() {
+
+}
+
+uint8_t* EpaperImage::getScanLineData(uint32_t y) {
+	//returns the scane line for defined line y
+	if (y > ResY) {
+		y = ResY;
+	} else if (y == 0) {//not allowed!
+		y = 1;
+	}
+	memset (mScanLine, 0, 44);
+	unsigned correctbyte = (y - 1) / 4;
+
+	mScanLine[correctbyte] = 0 | (192 >> (((y-1) % 4)*2));
+
+	return mScanLine;
+}
+
+uint8_t* EpaperImage::getEvenLineData(uint32_t y) {
+	if (y >= ResY) {
+		y = ResY-1;
+	}
+
+	memset(mEvenData, 0x00, 33);
+	unsigned i = 0;
+	for (unsigned x = 0; x < (ResX/4); ) {
+		mEvenData[i] = mImageData[y][x++] << 6;
+		mEvenData[i] |= mImageData[y][x++] << 4;
+		mEvenData[i] |= mImageData[y][x++] << 2;
+		mEvenData[i] |= mImageData[y][x++];
+		i++;
+	}
+	return NULL;
+}
+
+uint8_t* EpaperImage::getOddLineData(uint32_t y) {
+	return NULL;
+}
+
+uint8_t* EpaperImage::getInvEvenLineData(uint32_t y) {
+	return NULL;
+}
+uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
+	return NULL;
+}
+
+uint8_t* EpaperImage::getInterlacedDataLine(uint32_t y) {
+	return NULL;
+}
+uint8_t* EpaperImage::getInvInterlacedDataLine(uint32_t y) {
+	return NULL;
+}
+
+void EpaperImage::setPixel(uint32_t x, uint32_t y, uint8_t color) {
+
+}

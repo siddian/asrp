@@ -1,0 +1,8 @@
+#include <iostream>
+#include "EpaperImage.hpp"
+
+int main() {
+	EpaperImage image;
+	image.getEvenLineData(0);
+	return 0;
+}

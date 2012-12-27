@@ -1,0 +1,17 @@
+/*
+ * EpaperImage.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "EpaperImage.hpp"
+
+EpaperImage::EpaperImage() {
+
+}
+
+EpaperImage::~EpaperImage() {
+
+}
+

@@ -1,0 +1,23 @@
+/*
+ * Epaper.cpp
+ *
+ *  Created on: 27.12.2012
+ *      Author: siddian
+ */
+
+#include "Epaper.hpp"
+
+#include "wiringPi.h"
+#include <errno.h>
+
+Epaper::Epaper() {
+	mChannel = 0;
+	if (wiringPiSPISetup (mChannel, 8000000) < 0) {
+		fprintf(stderr, "SPI Setup failed: %s\n", strerror (errno));
+	}
+	wiringPiSetup();
+}
+
+Epaper::~Epaper() {
+
+}
