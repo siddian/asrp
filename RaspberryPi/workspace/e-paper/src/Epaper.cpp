@@ -323,12 +323,12 @@ void Epaper::powerOff() {
 	}
 	uint8_t data[16];
 
-	//TODO:
-	EpaperImage nothing;
-	nothing.fill(Px_NC);
-	writeImage(nothing);
-	writeLine(dummyLine);
-	delay(25);
+	//TODO: is this really needed?
+//	EpaperImage nothing;
+//	nothing.fill(Px_NC);
+//	writeImage(nothing);
+//	writeLine(dummyLine);
+//	delay(25);
 	//we do not us a border so skip this:
 	//border = 0
 //	delayMicroseconds(300000);//between 200 & 300 ms
