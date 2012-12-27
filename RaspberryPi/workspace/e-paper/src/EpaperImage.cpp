@@ -37,7 +37,7 @@ uint8_t* EpaperImage::getScanLineData(uint32_t y) {
 	memset (mScanLine, 0, 44);
 	unsigned correctbyte = y / 4;
 
-	mScanLine[correctbyte] = 0 | (192 >> ((y % 4)*2));
+	mScanLine[correctbyte] = 192 >> ((y % 4)*2);
 
 	return mScanLine;
 }
@@ -50,7 +50,6 @@ uint8_t* EpaperImage::getEvenLineData(uint32_t y) {
 	memset(mEvenData, 0x00, 33);
 	unsigned i = 0;
 	for (int x = ResX-1; x > 0; x = x-8) {
-//		std::cout << "x: " << x << " i: " << i << std::endl;
 		mEvenData[i] = mImageData[y][x] << 6;
 		mEvenData[i] |= mImageData[y][x-2] << 4;
 		mEvenData[i] |= mImageData[y][x-4] << 2;
@@ -83,34 +82,34 @@ uint8_t* EpaperImage::getInvEvenLineData(uint32_t y) {
 		y = ResY-1;
 	}
 
-	memset(mEvenData, 0x00, 33);
+	memset(mInvEvenData, 0x00, 33);
 	unsigned i = 0;
 	for (int x = ResX-1; x > 0; x = x-8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
-		mEvenData[i] = mInvImageData[y][x] << 6;
-		mEvenData[i] |= mInvImageData[y][x-2] << 4;
-		mEvenData[i] |= mInvImageData[y][x-4] << 2;
-		mEvenData[i] |= mInvImageData[y][x-6];
+		mInvEvenData[i] = mInvImageData[y][x] << 6;
+		mInvEvenData[i] |= mInvImageData[y][x-2] << 4;
+		mInvEvenData[i] |= mInvImageData[y][x-4] << 2;
+		mInvEvenData[i] |= mInvImageData[y][x-6];
 		i++;
 	}
-	return mEvenData;
+	return mInvEvenData;
 }
 uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
 	if (y >= ResY) {
 		y = ResY-1;
 	}
 
-	memset(mOddData, 0x00, 33);
+	memset(mInvOddData, 0x00, 33);
 	unsigned i = 0;
 	for (int x = ResX-2; x > 0; x = x-8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
-		mOddData[i] = mInvImageData[y][x] << 6;
-		mOddData[i] |= mInvImageData[y][x-2] << 4;
-		mOddData[i] |= mInvImageData[y][x-4] << 2;
-		mOddData[i] |= mInvImageData[y][x-6];
+		mInvOddData[i] = mInvImageData[y][x] << 6;
+		mInvOddData[i] |= mInvImageData[y][x-2] << 4;
+		mInvOddData[i] |= mInvImageData[y][x-4] << 2;
+		mInvOddData[i] |= mInvImageData[y][x-6];
 		i++;
 	}
-	return mOddData;
+	return mInvOddData;
 }
 
 uint8_t* EpaperImage::getInterlacedDataLine(uint32_t y) {

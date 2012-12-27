@@ -13,9 +13,9 @@
 #define ResX 264
 #define ResY 176
 
-#define Px_Black 0x11
-#define Px_White 0x10
-#define Px_NC 0x01
+#define Px_Black 3
+#define Px_White 2
+#define Px_NC 1
 
 class EpaperImage {
 	uint8_t mImageData[ResY][ResX];
@@ -32,7 +32,8 @@ class EpaperImage {
 
 	uint8_t mInterlacedData[110];
 	uint8_t mInvInterlacedData[110];
-private://temporarily public
+public://for debbugging temporarily public
+//private:
 	uint8_t* getScanLineData(uint32_t y);
 	uint8_t* getEvenLineData(uint32_t y);
 	uint8_t* getOddLineData(uint32_t y);
