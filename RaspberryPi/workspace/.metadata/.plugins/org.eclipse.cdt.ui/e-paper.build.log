@@ -2,16 +2,6 @@
 **** Build of configuration Debug for project e-paper ****
 
 make all 
-Building file: ../src/Epaper.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Epaper.d" -MT"src/Epaper.d" -o "src/Epaper.o" "../src/Epaper.cpp"
-Finished building: ../src/Epaper.cpp
- 
-Building file: ../src/EpaperImage.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EpaperImage.d" -MT"src/EpaperImage.d" -o "src/EpaperImage.o" "../src/EpaperImage.cpp"
-Finished building: ../src/EpaperImage.cpp
- 
 Building file: ../src/e-paper.cpp
 Invoking: GCC C++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/e-paper.d" -MT"src/e-paper.d" -o "src/e-paper.o" "../src/e-paper.cpp"
