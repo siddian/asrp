@@ -260,17 +260,17 @@ void Epaper::writeImage(EpaperImage &image) {
 		//set chargepump voltage level reduce voltage shift
 		memset(data, 0x00, 16);
 		sendData(0x04, data, 1);
-//		//send init again
-//		memset(data, 0, 16);
-//		data[0] = 0x00;
-//		data[1] = 0x00;
-//		data[2] = 0x00;
-//		data[3] = 0x7F;
-//		data[4] = 0xFF;
-//		data[5] = 0xFE;
-//		data[6] = 0x00;
-//		data[7] = 0x00;
-//		sendData(0x0A, data, 8);
+		//send init again
+		memset(data, 0, 16);
+		data[0] = 0x00;
+		data[1] = 0x00;
+		data[2] = 0x00;
+		data[3] = 0x7F;
+		data[4] = 0xFF;
+		data[5] = 0xFE;
+		data[6] = 0x00;
+		data[7] = 0x00;
+		sendData(0x0A, data, 8);
 		dummyLine = image.getInterlacedDataLine(y);
 		writeLine(dummyLine);
 		//complete the line
@@ -290,17 +290,17 @@ void Epaper::writeInvImage(EpaperImage &image) {
 		//set chargepump voltage level reduce voltage shift
 		memset(data, 0x00, 16);
 		sendData(0x04, data, 1);
-//		//send init again
-//		memset(data, 0, 16);
-//		data[0] = 0x00;
-//		data[1] = 0x00;
-//		data[2] = 0x00;
-//		data[3] = 0x7F;
-//		data[4] = 0xFF;
-//		data[5] = 0xFE;
-//		data[6] = 0x00;
-//		data[7] = 0x00;
-//		sendData(0x0A, data, 8);
+		//send init again
+		memset(data, 0, 16);
+		data[0] = 0x00;
+		data[1] = 0x00;
+		data[2] = 0x00;
+		data[3] = 0x7F;
+		data[4] = 0xFF;
+		data[5] = 0xFE;
+		data[6] = 0x00;
+		data[7] = 0x00;
+		sendData(0x0A, data, 8);
 		dummyLine = image.getInvInterlacedDataLine(y);
 		writeLine(dummyLine);
 		//complete the line
