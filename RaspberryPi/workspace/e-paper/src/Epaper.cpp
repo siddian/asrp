@@ -62,7 +62,7 @@ Epaper::~Epaper() {
 void Epaper::waitBusy() {
 	while (digitalRead(mBUSYPin) > 0) {
 		std::cout << "waiting ... " << millis() << std::endl;
-//		delayMicroseconds(1);
+		delayMicroseconds(1);
 	}
 }
 
@@ -101,6 +101,7 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 //    wiringPiSPIDataRW (mChannel, data, datasize);
 
 	digitalWrite(mCSPin, HIGH);
+	waitBusy();
 }
 
 
@@ -247,7 +248,6 @@ void Epaper::writeLine(uint8_t* data) {
 	for (unsigned i = 0; i < 110; i++) {
 		tmpdata[0] = data[i];
 		sendData(0x0A, tmpdata, 1);
-		waitBusy();
 	}
 }
 
@@ -289,17 +289,17 @@ void Epaper::writeInvImage(EpaperImage &image) {
 		//set chargepump voltage level reduce voltage shift
 		memset(data, 0x00, 16);
 		sendData(0x04, data, 1);
-		//send init again
-		memset(data, 0, 16);
-		data[0] = 0x00;
-		data[1] = 0x00;
-		data[2] = 0x00;
-		data[3] = 0x7F;
-		data[4] = 0xFF;
-		data[5] = 0xFE;
-		data[6] = 0x00;
-		data[7] = 0x00;
-		sendData(0x0A, data, 8);
+//		//send init again
+//		memset(data, 0, 16);
+//		data[0] = 0x00;
+//		data[1] = 0x00;
+//		data[2] = 0x00;
+//		data[3] = 0x7F;
+//		data[4] = 0xFF;
+//		data[5] = 0xFE;
+//		data[6] = 0x00;
+//		data[7] = 0x00;
+//		sendData(0x0A, data, 8);
 		dummyLine = image.getInvInterlacedDataLine(y);
 		writeLine(dummyLine);
 		//complete the line
