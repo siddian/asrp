@@ -8,6 +8,8 @@
 #ifndef WIRINGPI_H_
 #define WIRINGPI_H_
 
+#ifndef __ARMEL__
+
 #include <inttypes.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -63,5 +65,10 @@ void delayMicroseconds (unsigned int howLong) {
 #ifdef __cplusplus
 }
 #endif
+
+#else
+#include <wiringPi.h>
+#include <wiringPiSPI.h>
+#endif //__ARMEL__
 
 #endif /* WIRINGPI_H_ */

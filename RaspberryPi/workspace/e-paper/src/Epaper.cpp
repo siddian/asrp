@@ -8,7 +8,6 @@
 #include "Epaper.hpp"
 
 #include "wiringPi.h"
-#include "wiringPiSPI.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
