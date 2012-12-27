@@ -7,6 +7,9 @@ LDLIBS	= -lwiringPi
 
 all: e-paper
 
+clean:
+	@rm -rf *.o e-paper
+
 EpaperImage.o: EpaperImage.cpp EpaperImage.hpp
 	@$(CPP) -c $(CPPFLAGS) EpaperImage.cpp
 

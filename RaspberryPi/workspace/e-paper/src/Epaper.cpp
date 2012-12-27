@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 Epaper::Epaper() {
 	mRunning = true;
@@ -398,11 +399,14 @@ double Epaper::getTempCompensation() {
 void Epaper::updateImage(EpaperImage &newImage) {
 	memcpy(&mNewImage, &newImage, sizeof(EpaperImage));
 
+	std::cout << "powering on" << std::endl;
 	powerOn();
+	std::cout << "starting COG Driver" << std::endl;
 	initCOGDriver();
 	//TODO: when is this used?
 //	double stagetime = getTempCompensation() * 630;//in [ms]
 
+	std::cout << "stage 1" << std::endl;
 	writeInvImage(mOldImage);
 
 	for (unsigned x = 0; x < ResX; x++) {
@@ -416,12 +420,16 @@ void Epaper::updateImage(EpaperImage &newImage) {
 			}
 		}
 	}
+	std::cout << "stage 2" << std::endl;
 	writeImage(mWhiteImage);
+	std::cout << "stage 3" << std::endl;
 	writeInvImage(mNewImage);
+	std::cout << "stage 4" << std::endl;
 	writeImage(mNewImage);
 //	writeImage(mNewImage);//optional!
 
 	memcpy(&mOldImage, &mNewImage, sizeof(EpaperImage));
 
+	std::cout << "powering off" << std::endl;
 	powerOff();
 }
