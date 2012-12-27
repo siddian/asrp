@@ -11,8 +11,18 @@
 #include <string.h>
 
 EpaperImage::EpaperImage() {
-	memset(mImageData, Px_White, ResX*ResY);
-	memset(mInvImageData, Px_Black, ResX*ResY);
+	for (unsigned x = 0; x < ResX; x++) {
+		for (unsigned y = 0; y < ResY; y++) {
+			mImageData[x][y] = Px_White;
+		}
+	}
+	for (unsigned x = 0; x < ResX; x++) {
+		for (unsigned y = 0; y < ResY; y++) {
+			mInvImageData[x][y] = Px_Black;
+		}
+	}
+//	memset(mImageData, Px_White, ResX*ResY);
+//	memset(mInvImageData, Px_Black, ResX*ResY);
 }
 
 EpaperImage::~EpaperImage() {
