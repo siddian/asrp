@@ -35,9 +35,9 @@ class EpaperImage {
 public://for debbugging temporarily public
 //private:
 	uint8_t* getScanLineData(uint32_t y);
+
 	uint8_t* getEvenLineData(uint32_t y);
 	uint8_t* getOddLineData(uint32_t y);
-
 	uint8_t* getInvEvenLineData(uint32_t y);
 	uint8_t* getInvOddLineData(uint32_t y);
 public:

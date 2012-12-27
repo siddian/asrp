@@ -57,7 +57,7 @@ uint8_t* EpaperImage::getOddLineData(uint32_t y) {
 
 	memset(mOddData, 0x00, 33);
 	unsigned i = 0;
-	for (int x = 0; x < ResX-1; x = x+8) {
+	for (int x = 1; x < ResX-1; x = x+8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
 		mOddData[i] = mImageData[y][x] << 6;
 		mOddData[i] |= mImageData[y][x+2] << 4;
@@ -65,6 +65,14 @@ uint8_t* EpaperImage::getOddLineData(uint32_t y) {
 		mOddData[i] |= mImageData[y][x+6];
 		i++;
 	}
+//	for (int x = ResX-2; x > 0; x = x-8) {
+////		std::cout << "x: " << x << " i: " << i << std::endl;
+//		mOddData[i] = mImageData[y][x] << 6;
+//		mOddData[i] |= mImageData[y][x-2] << 4;
+//		mOddData[i] |= mImageData[y][x-4] << 2;
+//		mOddData[i] |= mImageData[y][x-6];
+//		i++;
+//	}
 	return mOddData;
 }
 
@@ -92,7 +100,7 @@ uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
 
 	memset(mInvOddData, 0x00, 33);
 	unsigned i = 0;
-	for (int x = 0; x < ResX-1; x = x+8) {
+	for (int x = 1; x < ResX-1; x = x+8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
 		mInvOddData[i] = mInvImageData[y][x] << 6;
 		mInvOddData[i] |= mInvImageData[y][x+2] << 4;
@@ -100,6 +108,14 @@ uint8_t* EpaperImage::getInvOddLineData(uint32_t y) {
 		mInvOddData[i] |= mInvImageData[y][x+6];
 		i++;
 	}
+//	for (int x = ResX-2; x > 0; x = x-8) {
+////		std::cout << "x: " << x << " i: " << i << std::endl;
+//		mInvOddData[i] = mInvImageData[y][x] << 6;
+//		mInvOddData[i] |= mInvImageData[y][x-2] << 4;
+//		mInvOddData[i] |= mInvImageData[y][x-4] << 2;
+//		mInvOddData[i] |= mInvImageData[y][x-6];
+//		i++;
+//	}
 	return mInvOddData;
 }
 
