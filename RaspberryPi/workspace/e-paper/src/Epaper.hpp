@@ -37,6 +37,7 @@ class Epaper {
 	EpaperImage mNewImage;
 	EpaperImage mWhiteImage;
 private:
+	void waitBusy();
 	void sendData(uint8_t registerIndex, uint8_t* data, size_t datasize);
 	void powerOn();
 	void initCOGDriver();

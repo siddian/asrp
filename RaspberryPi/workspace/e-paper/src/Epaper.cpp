@@ -59,8 +59,15 @@ Epaper::~Epaper() {
 
 }
 
+void Epaper::waitBusy() {
+	while (digitalRead(mBUSYPin) > 0) {
+		delayMicroseconds(1);
+	}
+}
+
 //defined on page 15
 void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
+	waitBusy();
 	//helper variables
 	uint8_t msg[1] = {0x70};
 
@@ -70,9 +77,11 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 	digitalWrite(mCSPin, LOW);
 	//header
     wiringPiSPIDataRW (mChannel, msg, 1);
+	waitBusy();
     //index
     msg[0] = registerIndex;
     wiringPiSPIDataRW (mChannel, msg, 1);
+	waitBusy();
     //switch enable off and on again
 	digitalWrite(mCSPin, HIGH);
 	delayMicroseconds(10);//TODO: at least 10 us!
@@ -80,17 +89,16 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 	//second header
     msg[0] = 0x72;
     wiringPiSPIDataRW (mChannel, msg, 1);
+	waitBusy();
 	//now send the actual data!
-//    for (unsigned i = 0; i < datasize; i++) {
-//        msg[0] = data[i];
-//        wiringPiSPIDataRW (mChannel, msg, 1);
-//		while (digitalRead(mBUSYPin) > 0) {
-//			delayMicroseconds(1);
-//		}
-//    }
+    for (unsigned i = 0; i < datasize; i++) {
+        msg[0] = data[i];
+        wiringPiSPIDataRW (mChannel, msg, 1);
+		waitBusy();
+    }
 
-    //TODO: or like this:
-    wiringPiSPIDataRW (mChannel, data, datasize);
+//    //TODO: or like this:
+//    wiringPiSPIDataRW (mChannel, data, datasize);
 
 	digitalWrite(mCSPin, HIGH);
 }
@@ -153,9 +161,7 @@ void Epaper::initCOGDriver() {
 	uint8_t data[16];
 
 	//wait for chip to be switched on
-	while (digitalRead(mBUSYPin) > 0) {
-		delayMicroseconds(1);
-	}
+	waitBusy();
 	//channel select:
 	memset(data, 0, 16);
 	data[0] = 0x00;
@@ -241,14 +247,11 @@ void Epaper::writeLine(uint8_t* data) {
 	for (unsigned i = 0; i < 110; i++) {
 		tmpdata[0] = data[i];
 		sendData(0x0A, tmpdata, 1);
-		while (digitalRead(mBUSYPin) > 0) {
-			delayMicroseconds(1);
-		}
+		waitBusy();
 	}
 }
 
 void Epaper::writeImage(EpaperImage &image) {
-	return;
 	//helper variables
 	uint8_t data[16];
 	uint8_t* dummyLine;
@@ -256,17 +259,17 @@ void Epaper::writeImage(EpaperImage &image) {
 		//set chargepump voltage level reduce voltage shift
 		memset(data, 0x00, 16);
 		sendData(0x04, data, 1);
-		//send init again
-		memset(data, 0, 16);
-		data[0] = 0x00;
-		data[1] = 0x00;
-		data[2] = 0x00;
-		data[3] = 0x7F;
-		data[4] = 0xFF;
-		data[5] = 0xFE;
-		data[6] = 0x00;
-		data[7] = 0x00;
-		sendData(0x0A, data, 8);
+//		//send init again
+//		memset(data, 0, 16);
+//		data[0] = 0x00;
+//		data[1] = 0x00;
+//		data[2] = 0x00;
+//		data[3] = 0x7F;
+//		data[4] = 0xFF;
+//		data[5] = 0xFE;
+//		data[6] = 0x00;
+//		data[7] = 0x00;
+//		sendData(0x0A, data, 8);
 		dummyLine = image.getInterlacedDataLine(y);
 		writeLine(dummyLine);
 		//complete the line
@@ -279,7 +282,6 @@ void Epaper::writeImage(EpaperImage &image) {
 }
 
 void Epaper::writeInvImage(EpaperImage &image) {
-	return;
 	//helper variables
 	uint8_t data[16];
 	uint8_t* dummyLine;
