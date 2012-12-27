@@ -94,13 +94,7 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     for (unsigned i = 0; i < datasize; i++) {
         msg[0] = data[i];
         wiringPiSPIDataRW (mChannel, msg, 1);
-//    	digitalWrite(mCSPin, HIGH);
-//    	waitBusy();
-//    	digitalWrite(mCSPin, LOW);
     }
-
-//    //TODO: or like this:
-//    wiringPiSPIDataRW (mChannel, data, datasize);
 
 	digitalWrite(mCSPin, HIGH);
 	waitBusy();
@@ -325,11 +319,11 @@ void Epaper::powerOff() {
 	uint8_t data[16];
 
 	//TODO: is this really needed?
-//	EpaperImage nothing;
-//	nothing.fill(Px_NC);
-//	writeImage(nothing);
-//	writeLine(dummyLine);
-//	delay(25);
+	EpaperImage nothing;
+	nothing.fill(Px_NC);
+	writeImage(nothing);
+	writeLine(dummyLine);
+	delay(25);
 	//we do not us a border so skip this:
 	//border = 0
 //	delayMicroseconds(300000);//between 200 & 300 ms

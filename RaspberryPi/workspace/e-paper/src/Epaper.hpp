@@ -37,6 +37,7 @@ class Epaper {
 	EpaperImage mNewImage;
 	EpaperImage mWhiteImage;
 private:
+	//XXX:seems like the busypin stuff is not really working
 	inline void waitBusy();
 	void sendData(uint8_t registerIndex, uint8_t* data, size_t datasize);
 	void powerOn();
