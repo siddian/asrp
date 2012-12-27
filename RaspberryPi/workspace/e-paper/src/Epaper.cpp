@@ -209,7 +209,7 @@ void Epaper::initCOGDriver() {
 	//start pwm signal
     pwmWrite(mPWMPin, 512);
     //for at least 30ms
-    delayM(30);
+    delay(30);
     pwmWrite(mPWMPin, 0);
 
 	//start chargepump negative V
@@ -248,6 +248,7 @@ void Epaper::writeLine(uint8_t* data) {
 }
 
 void Epaper::writeImage(EpaperImage &image) {
+	return;
 	//helper variables
 	uint8_t data[16];
 	uint8_t* dummyLine;
@@ -278,6 +279,7 @@ void Epaper::writeImage(EpaperImage &image) {
 }
 
 void Epaper::writeInvImage(EpaperImage &image) {
+	return;
 	//helper variables
 	uint8_t data[16];
 	uint8_t* dummyLine;
@@ -417,7 +419,6 @@ void Epaper::updateImage(EpaperImage &newImage) {
 
 	std::cout << "stage 1" << std::endl;
 	writeInvImage(mOldImage);
-
 	for (unsigned x = 0; x < ResX; x++) {
 		for (unsigned y = 0; y < ResY; y++) {
 			uint8_t pixel = mOldImage.getPixel(x,y);
