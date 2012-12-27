@@ -50,6 +50,8 @@ public:
 	uint8_t getPixel(uint32_t x, uint32_t y);
 	void setPixel(uint32_t x, uint32_t y, uint8_t color);
 
+	void fillRect(uint32_t startx, uint32_t starty, uint32_t endx, uint32_t endy, uint8_t color);
+
 	void fill(uint8_t color);
 
 };

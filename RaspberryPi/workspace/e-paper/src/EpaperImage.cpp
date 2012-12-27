@@ -164,6 +164,43 @@ void EpaperImage::setPixel(uint32_t x, uint32_t y, uint8_t color) {
 	mInvImageData[y][x] = invcolor;
 }
 
+void EpaperImage::fillRect(uint32_t startx, uint32_t starty, uint32_t endx, uint32_t endy, uint8_t color) {
+	uint8_t invcolor = Px_NC;
+	if (color == Px_Black) {
+		invcolor = Px_White;
+	}
+	if (color == Px_White) {
+		invcolor = Px_Black;
+	}
+
+	if (startx >= ResX) {
+		startx = ResX -1;
+	}
+	if (endx >= ResX) {
+		endx = ResX -1;
+	}
+
+	if (starty >= ResY) {
+		starty = ResY -1;
+	}
+	if (endy >= ResY) {
+		endy = ResY -1;
+	}
+
+	if (startx > endx) {
+		startx = endx;
+	}
+	if (starty > endy) {
+		starty = endy;
+	}
+	for (unsigned x = startx; startx < endx; x++) {
+		for (unsigned y = starty; starty < endy; y++) {
+			mImageData[y][x] = color;
+			mInvImageData[y][x] = invcolor;
+		}
+	}
+}
+
 void EpaperImage::fill(uint8_t color) {
 	uint8_t invcolor = Px_NC;
 	if (color == Px_Black) {
