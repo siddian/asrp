@@ -57,14 +57,22 @@ uint8_t* EpaperImage::getOddLineData(uint32_t y) {
 
 	memset(mOddData, 0x00, 33);
 	unsigned i = 0;
-	for (int x = ResX-2; x > 0; x = x-8) {
+	for (int x = 0; x < ResX-1; x = x+8) {
 //		std::cout << "x: " << x << " i: " << i << std::endl;
 		mOddData[i] = mImageData[y][x] << 6;
-		mOddData[i] |= mImageData[y][x-2] << 4;
-		mOddData[i] |= mImageData[y][x-4] << 2;
-		mOddData[i] |= mImageData[y][x-6];
+		mOddData[i] |= mImageData[y][x+2] << 4;
+		mOddData[i] |= mImageData[y][x+4] << 2;
+		mOddData[i] |= mImageData[y][x+6];
 		i++;
 	}
+//	for (int x = ResX-2; x > 0; x = x-8) {
+////		std::cout << "x: " << x << " i: " << i << std::endl;
+//		mOddData[i] = mImageData[y][x] << 6;
+//		mOddData[i] |= mImageData[y][x-2] << 4;
+//		mOddData[i] |= mImageData[y][x-4] << 2;
+//		mOddData[i] |= mImageData[y][x-6];
+//		i++;
+//	}
 	return mOddData;
 }
 
