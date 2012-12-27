@@ -50,6 +50,8 @@ public:
 	uint8_t getPixel(uint32_t x, uint32_t y);
 	void setPixel(uint32_t x, uint32_t y, uint8_t color);
 
+	void fill(uint8_t color);
+
 };
 
 #endif /* EPAPERIMAGE_HPP_ */

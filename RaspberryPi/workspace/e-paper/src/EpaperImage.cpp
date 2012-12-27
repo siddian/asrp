@@ -11,16 +11,7 @@
 #include <string.h>
 
 EpaperImage::EpaperImage() {
-	for (unsigned x = 0; x < ResX; x++) {
-		for (unsigned y = 0; y < ResY; y++) {
-			mImageData[y][x] = Px_White;
-		}
-	}
-	for (unsigned x = 0; x < ResX; x++) {
-		for (unsigned y = 0; y < ResY; y++) {
-			mInvImageData[y][x] = Px_Black;
-		}
-	}
+	fill(Px_White);
 //	memset(mImageData, Px_White, ResX*ResY);
 //	memset(mInvImageData, Px_Black, ResX*ResY);
 }
@@ -171,4 +162,25 @@ void EpaperImage::setPixel(uint32_t x, uint32_t y, uint8_t color) {
 
 	mImageData[y][x] = color;
 	mInvImageData[y][x] = invcolor;
+}
+
+void EpaperImage::fill(uint8_t color) {
+	uint8_t invcolor = Px_NC;
+	if (color == Px_Black) {
+		invcolor = Px_White;
+	}
+	if (color == Px_White) {
+		invcolor = Px_Black;
+	}
+
+	for (unsigned x = 0; x < ResX; x++) {
+		for (unsigned y = 0; y < ResY; y++) {
+			mImageData[y][x] = color;
+		}
+	}
+	for (unsigned x = 0; x < ResX; x++) {
+		for (unsigned y = 0; y < ResY; y++) {
+			mInvImageData[y][x] = invcolor;
+		}
+	}
 }
