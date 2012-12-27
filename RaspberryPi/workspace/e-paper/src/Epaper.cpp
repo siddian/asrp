@@ -61,10 +61,11 @@ Epaper::~Epaper() {
 }
 
 void Epaper::waitBusy() {
-	while (digitalRead(mBUSYPin) < 1) {
-		std::cout << "waiting ... " << millis() << std::endl;
-		delayMicroseconds(1);
-	}
+	delayMicroseconds(2);//maybe the busy pin stuff does not work!
+//	while (digitalRead(mBUSYPin) < 1) {
+//		std::cout << "waiting ... " << millis() << std::endl;
+//		delayMicroseconds(1);
+//	}
 }
 
 //defined on page 15
