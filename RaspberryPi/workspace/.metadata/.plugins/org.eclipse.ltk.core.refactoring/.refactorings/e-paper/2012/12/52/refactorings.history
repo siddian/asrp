@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;e-paper/src/wiringPi.h&apos; to &apos;wiringPi.h.bak&apos;" description="Rename resource &apos;wiringPi.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/wiringPi.h" name="wiringPi.h.bak" stamp="1356636801963" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;e-paper/src/wiringPi.h.bak&apos; to &apos;wiringPi.h&apos;" description="Rename resource &apos;wiringPi.h.bak&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/wiringPi.h.bak" name="wiringPi.h" stamp="1356636883530" updateReferences="true"/>
+</session>
