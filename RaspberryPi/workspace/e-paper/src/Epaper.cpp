@@ -435,8 +435,8 @@ void Epaper::updateImage(EpaperImage &newImage) {
 //			}
 //		}
 //	}
-//	std::cout << "stage 2" << std::endl;
-//	writeImage(mWhiteImage);
+	std::cout << "stage 2" << std::endl;
+	writeImage(mWhiteImage);
 	std::cout << "stage 3" << std::endl;
 	writeInvImage(mNewImage);
 	std::cout << "stage 4" << std::endl;
