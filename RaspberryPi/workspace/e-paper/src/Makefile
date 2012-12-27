@@ -11,13 +11,13 @@ clean:
 	@rm -rf *.o e-paper
 
 EpaperImage.o: EpaperImage.cpp EpaperImage.hpp
-	@$(CPP) -c $(CPPFLAGS) EpaperImage.cpp
+	$(CPP) -c $(CPPFLAGS) EpaperImage.cpp
 
 Epaper.o: Epaper.cpp Epaper.hpp
-	@$(CPP) -c $(CPPFLAGS) Epaper.cpp
+	$(CPP) -c $(CPPFLAGS) Epaper.cpp
 
 e-paper.o: e-paper.cpp
-	@$(CPP) -c $(CPPFLAGS) e-paper.cpp
+	$(CPP) -c $(CPPFLAGS) e-paper.cpp
 
 e-paper: e-paper.o Epaper.o EpaperImage.o
-	@$(CPP) -o $@ e-paper.o Epaper.o EpaperImage.o $(LDFLAGS) $(LDLIBS)
+	$(CPP) -o $@ e-paper.o Epaper.o EpaperImage.o $(LDFLAGS) $(LDLIBS)
