@@ -29,6 +29,9 @@
 extern "C" {
 #endif
 
+int wiringPiSetupSys() {
+	return 0;
+}
 int wiringPiSetup() {
 	return 0;
 }

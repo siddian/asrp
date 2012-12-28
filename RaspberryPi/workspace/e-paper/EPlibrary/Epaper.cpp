@@ -26,7 +26,7 @@ Epaper::Epaper() {
 	mBUSYPin = 5;
 	mDCPin = 6;
 
-	if (wiringPiSetup() < 0) {
+	if (wiringPiSetupSys() < 0) {
 		mRunning = false;
 		fprintf(stderr, "Wiring Setup failed: %s\n", strerror (errno));
 	}
