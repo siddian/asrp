@@ -41,7 +41,7 @@ private:
 	void powerOn();
 	void initCOGDriver();
 	double getTempCompensation();
-	void writeLine(uint8_t* data);//expects an array of length (264+176)*2 bits = 110 bytes
+//	void writeLine(uint8_t* data);//expects an array of length (264+176)*2 bits = 110 bytes
 	void writeImage(EpaperImage &image);
 	void writeInvImage(EpaperImage &image);
 	void powerOff();
