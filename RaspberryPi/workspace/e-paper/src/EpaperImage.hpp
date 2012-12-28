@@ -9,9 +9,10 @@
 #define EPAPERIMAGE_HPP_
 
 #include <stdint.h>
+#include <string>
 
-#define ResX 264
-#define ResY 176
+#define ResX 264//no. cols or width
+#define ResY 176//no. rows or height
 
 #define Px_Black 3
 #define Px_White 2
@@ -54,6 +55,7 @@ public:
 
 	void fill(uint8_t color);
 
+	void readFromFile(std::string name);
 };
 
 #endif /* EPAPERIMAGE_HPP_ */

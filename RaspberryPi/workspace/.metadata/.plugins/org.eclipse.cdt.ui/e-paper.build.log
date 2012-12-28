@@ -2,6 +2,11 @@
 **** Build of configuration Debug for project e-paper ****
 
 make all 
+Building file: ../src/EpaperImage.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EpaperImage.d" -MT"src/EpaperImage.d" -o "src/EpaperImage.o" "../src/EpaperImage.cpp"
+Finished building: ../src/EpaperImage.cpp
+ 
 Building file: ../src/e-paper.cpp
 Invoking: GCC C++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/e-paper.d" -MT"src/e-paper.d" -o "src/e-paper.o" "../src/e-paper.cpp"
@@ -9,7 +14,7 @@ Finished building: ../src/e-paper.cpp
  
 Building target: e-paper
 Invoking: GCC C++ Linker
-g++  -o "e-paper"  ./src/Epaper.o ./src/EpaperImage.o ./src/e-paper.o   
+g++  -o "e-paper"  ./src/Epaper.o ./src/EpaperImage.o ./src/e-paper.o ./src/pgm.o   
 Finished building target: e-paper
  
 

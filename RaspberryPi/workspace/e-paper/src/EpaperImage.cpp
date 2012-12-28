@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stddef.h>
 #include <string.h>
+#include "pgm.h"
 
 EpaperImage::EpaperImage() {
 	fill(Px_White);
@@ -234,6 +235,25 @@ void EpaperImage::fill(uint8_t color) {
 	for (unsigned x = 0; x < ResX; x++) {
 		for (unsigned y = 0; y < ResY; y++) {
 			mInvImageData[y][x] = invcolor;
+		}
+	}
+}
+
+uint8_t colorFromRGB (RGB_INT rgb) {
+	double color = .2126 * (double)rgb.red + .7152 * (double)rgb.green + .0722 * (double)rgb.blue;
+	return (color < (256.0/2)) ? Px_White : Px_Black;
+}
+
+void EpaperImage::readFromFile(std::string name) {
+	PGMImage image;
+	getPGMfile(name.c_str(), &image);
+
+	uint32_t maxX = (image.width < ResX) ? (uint32_t)image.width : ResX;
+	uint32_t maxY = (image.height < ResY) ? (uint32_t)image.height : ResY;
+
+	for (unsigned x = 0; x < maxX; x++) {
+		for (unsigned y = 0; y < maxY; y++) {
+			setPixel(x,y,colorFromRGB(image.data[y][x]));
 		}
 	}
 }
