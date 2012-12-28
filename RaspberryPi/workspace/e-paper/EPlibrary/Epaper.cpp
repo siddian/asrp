@@ -67,7 +67,7 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 
 	//lets start
 	digitalWrite(mCSPin, HIGH);
-	delayMicroseconds(10);//from documentation
+	delayMicroseconds(10);
 	digitalWrite(mCSPin, LOW);
 	//header
     wiringPiSPIDataRW (mChannel, msg, 1);
@@ -76,7 +76,7 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     wiringPiSPIDataRW (mChannel, msg, 1);
     //switch enable off and on again
 	digitalWrite(mCSPin, HIGH);
-	delayMicroseconds(10);//from documentation
+	delayMicroseconds(10);
 	digitalWrite(mCSPin, LOW);
 	//second header
     msg[0] = 0x72;
@@ -227,18 +227,18 @@ void Epaper::initCOGDriver() {
 	//from this point on the display pattern is expected
 }
 
-//void Epaper::writeLine(uint8_t* data) {
-//	//working code:
-////	uint8_t tmpdata[16];
-////	for (unsigned i = 0; i < 110; i++) {
-////		tmpdata[0] = data[i];
-////		sendData(0x0A, tmpdata, 1);
-////	}
-//	//##########until here########################
-//
-//	//this is waaaayyyy faster!
-//	sendData(0x0A, data, 110);
-//}
+void Epaper::writeLine(uint8_t* data) {
+	//working code:
+//	uint8_t tmpdata[16];
+//	for (unsigned i = 0; i < 110; i++) {
+//		tmpdata[0] = data[i];
+//		sendData(0x0A, tmpdata, 1);
+//	}
+	//##########until here########################
+
+	//this is waaaayyyy faster!
+	sendData(0x0A, data, 110);
+}
 
 void Epaper::writeImage(EpaperImage &image) {
 	//helper variables
@@ -260,8 +260,7 @@ void Epaper::writeImage(EpaperImage &image) {
 		data[7] = 0x00;
 		sendData(0x0A, data, 8);
 		line = image.getInterlacedDataLine(y);
-		sendData(0x0A, data, 110);
-//		writeLine(line);
+		writeLine(line);
 		//complete the line
 		data[0] = 0x00;
 		sendData(0x0A, data, 1);
@@ -291,8 +290,7 @@ void Epaper::writeInvImage(EpaperImage &image) {
 		data[7] = 0x00;
 		sendData(0x0A, data, 8);
 		dummyLine = image.getInvInterlacedDataLine(y);
-//		writeLine(dummyLine);
-		sendData(0x0A, dummyLine, 110);
+		writeLine(dummyLine);
 		//complete the line
 		data[0] = 0x00;
 		sendData(0x0A, data, 1);
@@ -316,8 +314,7 @@ void Epaper::powerOff() {
 	EpaperImage nothing;
 	nothing.fill(Px_NC);
 	writeImage(nothing);
-//	writeLine(dummyLine);
-	sendData(0x0A, dummyLine, 110);
+	writeLine(dummyLine);
 	delay(25);
 	//we do not us a border so skip this:
 	//border = 0
