@@ -1,21 +1,14 @@
 
-**** Build of configuration Debug for project e-paper ****
+**** Build of configuration Default for project e-paper ****
 
 make all 
-Building file: ../src/EpaperImage.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/EpaperImage.d" -MT"src/EpaperImage.d" -o "src/EpaperImage.o" "../src/EpaperImage.cpp"
-Finished building: ../src/EpaperImage.cpp
- 
-Building file: ../src/e-paper.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/e-paper.d" -MT"src/e-paper.d" -o "src/e-paper.o" "../src/e-paper.cpp"
-Finished building: ../src/e-paper.cpp
- 
-Building target: e-paper
-Invoking: GCC C++ Linker
-g++  -o "e-paper"  ./src/Epaper.o ./src/EpaperImage.o ./src/e-paper.o ./src/pgm.o   
-Finished building target: e-paper
- 
+Scanning dependencies of target ePaper
+[ 25%] Building CXX object EPlibrary/CMakeFiles/ePaper.dir/Epaper.cpp.o
+Linking CXX static library libePaper.a
+[ 75%] Built target ePaper
+Scanning dependencies of target pgmloader
+[100%] Building CXX object Examples/pgmloader/CMakeFiles/pgmloader.dir/e-paper.cpp.o
+Linking CXX executable pgmloader
+[100%] Built target pgmloader
 
 **** Build Finished ****

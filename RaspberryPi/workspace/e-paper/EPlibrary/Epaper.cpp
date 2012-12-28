@@ -228,19 +228,6 @@ void Epaper::initCOGDriver() {
 	//from this point on the display pattern is expected
 }
 
-//void Epaper::writeLine(uint8_t* data) {
-//	//working code:
-////	uint8_t tmpdata[16];
-////	for (unsigned i = 0; i < 110; i++) {
-////		tmpdata[0] = data[i];
-////		sendData(0x0A, tmpdata, 1);
-////	}
-//	//##########until here########################
-//
-//	//this is waaaayyyy faster!
-//	sendData(0x0A, data, 110);
-//}
-
 void Epaper::writeImage(EpaperImage &image) {
 	//helper variables
 	uint8_t data[16];
@@ -394,10 +381,10 @@ void Epaper::powerOff() {
 
 }
 
-double Epaper::getTempCompensation() {
-	//TODO:
-	return 1;
-}
+//double Epaper::getTempCompensation() {
+//	//TODO:
+//	return 1;
+//}
 
 //defined page 28
 void Epaper::updateImage(EpaperImage &newImage, bool skipfirst) {

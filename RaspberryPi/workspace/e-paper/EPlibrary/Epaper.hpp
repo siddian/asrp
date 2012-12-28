@@ -40,8 +40,7 @@ private:
 	inline void sendData(uint8_t registerIndex, uint8_t* data, size_t datasize);
 	void powerOn();
 	void initCOGDriver();
-	double getTempCompensation();
-//	inline void writeLine(uint8_t* data);//expects an array of length (264+176)*2 bits = 110 bytes
+//	double getTempCompensation();
 	void writeImage(EpaperImage &image);
 	void writeInvImage(EpaperImage &image);
 	void powerOff();

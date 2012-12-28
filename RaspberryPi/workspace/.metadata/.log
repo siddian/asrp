@@ -306,3 +306,33 @@ org.eclipse.core.internal.resources.ResourceException: Resource '/e-paper/Debug/
 !MESSAGE Resource '/e-paper/Debug/sources.mk' does not exist.
 !SUBENTRY 1 org.eclipse.core.resources 4 368 2012-12-27 20:24:25.324
 !MESSAGE Resource '/e-paper/Debug/sources.mk' does not exist.
+!SESSION 2012-12-28 18:55:06.939 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_09
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jface 2 0 2012-12-28 19:33:03.597
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2012-12-28 19:33:03.597
+!MESSAGE A conflict occurred for CTRL+/:
+Binding(CTRL+/,
+	ParameterizedCommand(Command(com.cthing.cmakeed.ui.Comment.Command,Block Comment,
+		,
+		Category(cmakeed.category,CMakeEd Commands,CMakeEd Commands,true),
+		ActionDelegateHandlerProxy(null,com.cthing.cmakeed.ui.editor.actions.CMakeEditorCommentActionDelegate),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+/,
+	ParameterizedCommand(Command(org.jactr.eclipse.ui.editor.edit.comment,Comment,
+		,
+		Category(org.eclipse.ui.category.edit,Edit,null,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.cdt.core 1 0 2012-12-28 19:48:37.450
+!MESSAGE Indexed 'e-paper' (0 sources, 76 headers) in 1,10 sec: 2.139 declarations; 2.375 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0,00 %)

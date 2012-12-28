@@ -8,6 +8,11 @@
 #ifndef WIRINGPI_H_
 #define WIRINGPI_H_
 
+/*
+ * this is a dummy header file that lets you compile and test programs in a cross-platform compiling scenario.
+ * Compiling this on the RPi will include all the correct files with the proper definitions. See below
+ */
+
 #ifndef __ARMEL__
 
 #include <inttypes.h>
