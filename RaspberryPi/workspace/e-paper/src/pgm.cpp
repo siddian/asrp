@@ -12,7 +12,7 @@
 /***********************************************************************/
 
 /*Gets an ascii pgm image file, store as a color pgm.*/
-void getPGMfile (const char filename[], PGMImage *img)
+int getPGMfile (const char filename[], PGMImage *img)
 {
 	FILE *in_file;
 	char ch;
@@ -23,7 +23,7 @@ void getPGMfile (const char filename[], PGMImage *img)
 	if (in_file == NULL)
 	{
 		fprintf(stderr, "Error: Unable to open file %s\n\n", filename);
-		exit(8);
+		return -1;
 	}
 
 	printf("\nReading image file: %s\n", filename);
@@ -33,7 +33,7 @@ void getPGMfile (const char filename[], PGMImage *img)
 	if(ch != 'P')
 	{
 		printf("ERROR(1): Not valid pgm/ppm file type\n");
-		exit(1);
+		return -1;
 	}
 	ch = getc(in_file);
 	/*convert the one digit integer currently represented as a character to
@@ -42,7 +42,7 @@ void getPGMfile (const char filename[], PGMImage *img)
 	if((type != 2) && (type != 3) && (type != 5) && (type != 6))
 	{
 		printf("ERROR(2): Not valid pgm/ppm file type\n");
-		exit(1);
+		return -1;
 	}
 
 	while(getc(in_file) != '\n');             /* skip to end of line*/
@@ -68,7 +68,7 @@ void getPGMfile (const char filename[], PGMImage *img)
 	if (((*img).width  > MAX) || ((*img).height  > MAX))
 	{
 		printf("\n\n***ERROR - image too big for current image structure***\n\n");
-		exit(1);
+		return -1;
 	}
 
 	if(type == 2) /*uncompressed ascii file (B/W)*/
@@ -128,6 +128,7 @@ void getPGMfile (const char filename[], PGMImage *img)
 
 	fclose(in_file);
 	printf("\nDone reading file.\n");
+	return 0;
 }
 
 

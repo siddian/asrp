@@ -246,7 +246,9 @@ uint8_t colorFromRGB (RGB_INT rgb) {
 
 void EpaperImage::readFromFile(std::string name) {
 	PGMImage image;
-	getPGMfile(name.c_str(), &image);
+	if (getPGMfile(name.c_str(), &image) < 0) {
+		return;
+	}
 
 	uint32_t maxX = (image.width < ResX) ? (uint32_t)image.width : ResX;
 	uint32_t maxY = (image.height < ResY) ? (uint32_t)image.height : ResY;

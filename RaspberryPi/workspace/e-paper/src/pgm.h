@@ -38,7 +38,7 @@ typedef struct PGMstructure PGMImage;
 /***prototypes**********************************************************/
 /***********************************************************************/
 
-void getPGMfile (const char filename[], PGMImage *img);
+int getPGMfile (const char filename[], PGMImage *img);
 void save(PGMImage *img);
 
 #endif /* PGM_H_ */
