@@ -236,6 +236,7 @@ void Epaper::writeLine(uint8_t* data) {
 //	}
 	//##########until here########################
 
+	//this is waaaayyyy faster!
 	sendData(0x0A, data, 110);
 }
 
