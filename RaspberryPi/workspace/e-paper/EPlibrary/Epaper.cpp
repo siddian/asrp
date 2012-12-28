@@ -413,6 +413,9 @@ void Epaper::updateImage(EpaperImage &newImage, bool skipfirst) {
 	//TODO: when is this used?
 //	double stagetime = getTempCompensation() * 630;//in [ms]
 
+	unsigned startTime = millis();
+	std::cout << "starting update at " << startTime << std::endl;
+
 	if (!skipfirst) {
 		std::cout << "stage 1" << std::endl;
 		writeInvImage(mOldImage);
@@ -435,6 +438,9 @@ void Epaper::updateImage(EpaperImage &newImage, bool skipfirst) {
 	std::cout << "stage 4" << std::endl;
 	writeImage(mNewImage);
 //	writeImage(mNewImage);//optional!
+
+	unsigned stopTime = millis();
+	std::cout << "stopping update at " << stopTime << " duration: " << stopTime - startTime << std::endl;
 
 	memcpy(&mOldImage, &mNewImage, sizeof(EpaperImage));
 
