@@ -228,11 +228,15 @@ void Epaper::initCOGDriver() {
 }
 
 void Epaper::writeLine(uint8_t* data) {
-	uint8_t tmpdata[16];
-	for (unsigned i = 0; i < 110; i++) {
-		tmpdata[0] = data[i];
-		sendData(0x0A, tmpdata, 1);
-	}
+	//working code:
+//	uint8_t tmpdata[16];
+//	for (unsigned i = 0; i < 110; i++) {
+//		tmpdata[0] = data[i];
+//		sendData(0x0A, tmpdata, 1);
+//	}
+	//##########until here########################
+
+	sendData(0x0A, data, 110);
 }
 
 void Epaper::writeImage(EpaperImage &image) {
