@@ -255,7 +255,7 @@ void EpaperImage::readFromFile(std::string name) {
 
 	for (unsigned x = 0; x < maxX; x++) {
 		for (unsigned y = 0; y < maxY; y++) {
-			setPixel(x,y,colorFromRGB(image.data[y][x]));
+			setPixel(maxX - x - 1,maxY - y - 1,colorFromRGB(image.data[y][x]));
 		}
 	}
 }
