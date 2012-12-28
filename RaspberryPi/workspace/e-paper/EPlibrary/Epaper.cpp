@@ -18,7 +18,7 @@ Epaper::Epaper() {
 	mRunning = true;
 	//TODO: read this from a config file
 	mChannel = 0;
-	mFreq = 32000000;
+	mFreq = 16000000;
 	mPWMPin = 1;//only available hardware PWM pin!
 	mENPin = 2;
 	mCSPin = 3;
