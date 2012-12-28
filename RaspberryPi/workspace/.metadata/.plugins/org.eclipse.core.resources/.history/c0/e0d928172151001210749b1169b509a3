@@ -1,0 +1,8 @@
+cmake_minimum_required (VERSION 2.6) 
+
+message(STATUS "processor: ${CMAKE_SYSTEM}")
+
+project (ePaper)
+
+add_subdirectory (EPlibrary)
+add_subdirectory (Examples/pgmloader)

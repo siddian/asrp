@@ -1,0 +1,33 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CPP_SRCS += \
+../src/Epaper.cpp \
+../src/EpaperImage.cpp \
+../src/e-paper.cpp \
+../src/pgm.cpp 
+
+OBJS += \
+./src/Epaper.o \
+./src/EpaperImage.o \
+./src/e-paper.o \
+./src/pgm.o 
+
+CPP_DEPS += \
+./src/Epaper.d \
+./src/EpaperImage.d \
+./src/e-paper.d \
+./src/pgm.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+src/%.o: ../src/%.cpp
+	@echo 'Building file: $<'
+	@echo 'Invoking: GCC C++ Compiler'
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

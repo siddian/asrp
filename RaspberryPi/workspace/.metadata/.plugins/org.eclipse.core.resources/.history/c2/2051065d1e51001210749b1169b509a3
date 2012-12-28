@@ -1,0 +1,5 @@
+SET(PGMLOADER_SRC Epaper.cpp
+                   EpaperImage.cpp
+                   pgm.cpp)
+
+add_library (pgmloader ${PGMLOADER_SRC})

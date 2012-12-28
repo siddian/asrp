@@ -1,0 +1,16 @@
+#include <iostream>
+#include "Epaper.hpp"
+
+int main() {
+	EpaperImage image;
+//	Epaper display;
+//	display.updateImage(image);
+
+	uint8_t* data = image.getEvenLineData(0);
+//
+//	for (unsigned i = 0; i < 110; i++) {
+//		std::cout << (int)(data[i]) << ",";
+//	}
+//	std::cout << std::endl;
+	return 0;
+}

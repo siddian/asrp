@@ -1,0 +1,8 @@
+include_directories (${ePaper_SOURCE_DIR}/EPlibrary)
+
+link_directories (${ePaper_BINARY_DIR}/EPlibrary) 
+
+SET(PGMLOADER_SRC e-paper.cpp)
+
+add_executable(pgmloader ${PGMLOADER_SRC})
+TARGET_LINK_LIBRARIES(ePaper pgmloader)
