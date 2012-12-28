@@ -60,17 +60,8 @@ Epaper::~Epaper() {
 
 }
 
-void Epaper::waitBusy() {
-//	delayMicroseconds(2);//maybe the busy pin stuff does not work!
-//	while (digitalRead(mBUSYPin) < 1) {
-//		std::cout << "waiting ... " << millis() << std::endl;
-//		delayMicroseconds(1);
-//	}
-}
-
 //defined on page 15
 void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
-	waitBusy();
 	//helper variables
 	uint8_t msg[1] = {0x70};
 
@@ -85,7 +76,7 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     wiringPiSPIDataRW (mChannel, msg, 1);
     //switch enable off and on again
 	digitalWrite(mCSPin, HIGH);
-	delayMicroseconds(10);//TODO: at least 10 us!
+	delayMicroseconds(10);
 	digitalWrite(mCSPin, LOW);
 	//second header
     msg[0] = 0x72;
@@ -97,7 +88,6 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     }
 
 	digitalWrite(mCSPin, HIGH);
-	waitBusy();
 }
 
 
@@ -157,8 +147,6 @@ void Epaper::initCOGDriver() {
 	//helper variables
 	uint8_t data[16];
 
-	//wait for chip to be switched on
-	waitBusy();
 	//channel select:
 	memset(data, 0, 16);
 	data[0] = 0x00;
@@ -250,7 +238,7 @@ void Epaper::writeLine(uint8_t* data) {
 void Epaper::writeImage(EpaperImage &image) {
 	//helper variables
 	uint8_t data[16];
-	uint8_t* dummyLine;
+	uint8_t* line;
 	for (unsigned y = 0; y < ResY; y++) {
 		//set chargepump voltage level reduce voltage shift
 		memset(data, 0x00, 16);
@@ -266,8 +254,8 @@ void Epaper::writeImage(EpaperImage &image) {
 		data[6] = 0x00;
 		data[7] = 0x00;
 		sendData(0x0A, data, 8);
-		dummyLine = image.getInterlacedDataLine(y);
-		writeLine(dummyLine);
+		line = image.getInterlacedDataLine(y);
+		writeLine(line);
 		//complete the line
 		data[0] = 0x00;
 		sendData(0x0A, data, 1);
@@ -318,7 +306,6 @@ void Epaper::powerOff() {
 	}
 	uint8_t data[16];
 
-	//TODO: is this really needed?
 	EpaperImage nothing;
 	nothing.fill(Px_NC);
 	writeImage(nothing);
