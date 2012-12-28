@@ -67,7 +67,8 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
 
 	//lets start
 	digitalWrite(mCSPin, HIGH);
-	delayMicroseconds(10);
+//	delayMicroseconds(10);//from documentation
+	delayMicroseconds(5);
 	digitalWrite(mCSPin, LOW);
 	//header
     wiringPiSPIDataRW (mChannel, msg, 1);
@@ -76,7 +77,9 @@ void Epaper::sendData(uint8_t registerIndex, uint8_t* data, size_t datasize) {
     wiringPiSPIDataRW (mChannel, msg, 1);
     //switch enable off and on again
 	digitalWrite(mCSPin, HIGH);
-	delayMicroseconds(10);
+	digitalWrite(mCSPin, HIGH);
+//	delayMicroseconds(10);//from documentation
+	delayMicroseconds(5);
 	digitalWrite(mCSPin, LOW);
 	//second header
     msg[0] = 0x72;
@@ -316,7 +319,7 @@ void Epaper::powerOff() {
 	writeImage(nothing);
 	writeLine(dummyLine);
 	delay(25);
-	//we do not us a border so skip this:
+	//we do not use a border so skip this:
 	//border = 0
 //	delayMicroseconds(300000);//between 200 & 300 ms
 	//border = 1
