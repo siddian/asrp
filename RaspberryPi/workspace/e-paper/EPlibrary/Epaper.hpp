@@ -50,8 +50,19 @@ private:
 public:
 	Epaper();
 	virtual ~Epaper();
-
-	void updateImage(EpaperImage &newImage);
+	/*
+	 * writes a new image to the display following this execution process:
+	 * 1. Power On
+	 * 2. Initialize COG (Circuit on Glass) Driver
+	 * 3. Stage 1 Display update (writing inverted old image)
+	 * 4. Stage 2 Display update (writing a white image)
+	 * 5. Stage 3 Display update (writing inverted new image)
+	 * 6. Stage 4 Display update (writing new image)
+	 * 7. Power Off
+	 *
+	 * By specifying skipfirst = true the points 3.&4. are skipped from the update process.
+	 */
+	void updateImage(EpaperImage &newImage, bool skipfirst = false);
 };
 
 #endif /* EPAPER_HPP_ */

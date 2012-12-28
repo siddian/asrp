@@ -9,6 +9,6 @@ int main(int argc, char *argv[]) {
 		image.readFromFile(std::string(argv[1]));
 	}
 	Epaper display;
-	display.updateImage(image);
+	display.updateImage(image, true);
 	return 0;
 }
