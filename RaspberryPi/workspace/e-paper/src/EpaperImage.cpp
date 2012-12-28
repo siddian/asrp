@@ -241,7 +241,7 @@ void EpaperImage::fill(uint8_t color) {
 
 uint8_t colorFromRGB (RGB_INT rgb) {
 	double color = .2126 * (double)rgb.red + .7152 * (double)rgb.green + .0722 * (double)rgb.blue;
-	return (color < (256.0/2)) ? Px_White : Px_Black;
+	return (color < (256.0/2)) ? Px_Black : Px_White;
 }
 
 void EpaperImage::readFromFile(std::string name) {
