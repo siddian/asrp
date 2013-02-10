@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/pgmloader.dir/e-paper.cpp.o  -o pgmloader -rdynamic -L/home/siddian/src/asrp/RaspberryPi/workspace/e-paper/build/EPlibrary ../../EPlibrary/libePaper.a -Wl,-rpath,/home/siddian/src/asrp/RaspberryPi/workspace/e-paper/build/EPlibrary 

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../EPlibrary/Epaper.hpp
+stdint.h
+-
+stddef.h
+-
+EpaperImage.hpp
+../EPlibrary/EpaperImage.hpp
+
+../EPlibrary/EpaperImage.hpp
+stdint.h
+-
+string
+-
+
+/home/siddian/src/asrp/RaspberryPi/workspace/e-paper/Examples/pgmloader/e-paper.cpp
+iostream
+-
+Epaper.hpp
+/home/siddian/src/asrp/RaspberryPi/workspace/e-paper/Examples/pgmloader/Epaper.hpp
+

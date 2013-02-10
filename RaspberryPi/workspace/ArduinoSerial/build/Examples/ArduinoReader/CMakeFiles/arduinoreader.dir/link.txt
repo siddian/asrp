@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/arduinoreader.dir/reader.cpp.o  -o arduinoreader -rdynamic 

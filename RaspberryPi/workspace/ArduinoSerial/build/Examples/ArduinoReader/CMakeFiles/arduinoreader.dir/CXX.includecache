@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/siddian/src/asrp/RaspberryPi/workspace/ArduinoSerial/Examples/ArduinoReader/reader.cpp
+iostream
+-
+string
+-
+errno.h
+-
+stdio.h
+-
+fcntl.h
+-
+termios.h
+-
+string.h
+-
+unistd.h
+-
+

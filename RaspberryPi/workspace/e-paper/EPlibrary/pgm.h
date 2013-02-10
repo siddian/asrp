@@ -1,8 +1,24 @@
 /*
- * pgm.h
+ * asrp:
+ *      Autonomous Stratosphere Return-Plane library
+ *      Copyright (c) 2013 Johannes Lächele
+ ***********************************************************************
+ * This file is part of asrp:
+ *      http://code.google.com/p/asrp/
  *
- *  Created on: 28.12.2012
- *      Author: siddian
+ *    asrp is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU Lesser General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    asrp is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU Lesser General Public License for more details.
+ *
+ *    You should have received a copy of the GNU Lesser General Public License
+ *    along with asrp.  If not, see <http://www.gnu.org/licenses/>.
+ ***********************************************************************
  */
 
 #ifndef PGM_H_

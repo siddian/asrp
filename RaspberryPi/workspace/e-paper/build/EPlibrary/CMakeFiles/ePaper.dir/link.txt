@@ -1,0 +1,2 @@
+/usr/bin/ar cr libePaper.a  CMakeFiles/ePaper.dir/Epaper.cpp.o CMakeFiles/ePaper.dir/EpaperImage.cpp.o CMakeFiles/ePaper.dir/pgm.cpp.o
+/usr/bin/ranlib libePaper.a
