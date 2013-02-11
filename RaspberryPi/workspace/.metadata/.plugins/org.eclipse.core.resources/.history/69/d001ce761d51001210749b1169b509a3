@@ -1,6 +1,0 @@
-cmake_minimum_required (VERSION 2.6) 
-
-project (ePaper) 
-
-add_subdirectory (EPlibrary) 
-add_subdirectory (Examples)
