@@ -187,9 +187,13 @@ void setup()
 	digitalWrite(STATUS_LED,LOW);
 	delay(1500);
 
+	Serial.println("Starting Accel_Init procedure");
 	Accel_Init();
+	Serial.println("Starting Compass_Init procedure");
 	Compass_Init();
+	Serial.println("Starting Gyro_Init procedure");
 	Gyro_Init();
+	Serial.println("Done with init procedure");
 
 	delay(20);
 
