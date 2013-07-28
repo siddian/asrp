@@ -14,25 +14,15 @@ class Receiver {
 private:
 	//how many channels do we expect
 	unsigned mChannelNum;
-	//do we want to normalize the values? Include double calculation...
-	bool mDoNormalize;
 	//data storage
 	int* mValues;
-//	double* mValuesNormalized;
-//	//values used for normalizing
-//	//these are arrays of mChannelNum values each
-//	int* mBias;
-//	int* mScalefactor;
+
 public:
-	Receiver (unsigned channelNum, bool doNormalize = true);
+	Receiver (unsigned channelNum);
 	virtual ~Receiver ();
 
-	void setup();
+	void setup(int interrupt = 0);
 	int getValue(unsigned channel);
-//	double getValueNormalized(unsigned channel);
-//
-//	void setScaling(unsigned channel, int scaling);
-//	void setBias(unsigned channel, int bias);
 };
 
 #endif /* RECEIVER_HPP_ */

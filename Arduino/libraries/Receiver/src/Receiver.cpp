@@ -6,12 +6,13 @@
  */
 
 #include "Receiver.hpp"
+#include <Arduino.h>
 
-volatile unsigned channels = 0;
-volatile unsigned oldtime = 0;
-volatile unsigned long timepassed = 0;
-volatile unsigned index = 0;
-volatile int* rcValues = NULL;
+static unsigned channels = 0;
+static unsigned oldtime = 0;
+static unsigned long timepassed = 0;
+static unsigned index = 0;
+static int* rcValues = NULL;
 
 void calc(void) {
 	if (rcValues == NULL) {
@@ -19,21 +20,21 @@ void calc(void) {
 	}
 	unsigned now = micros();
 	timepassed = now - oldtime;
+	oldtime = now;
 
-	if (timepassed > 5000) {
+	if (timepassed > 3000) {
 		index = 0;
-	} else if (timepassed > 1000) {
+		timepassed = 0;
+	} else if (timepassed > 700 && index < channels) {
 		rcValues[index] = timepassed;
 		index++;
-		index = index % channels;
+		timepassed = 0;
 	}
-	oldtime = now;
 }
 
-Receiver::Receiver (unsigned channelNum, bool doNormalize) {
+Receiver::Receiver (unsigned channelNum) {
 	mChannelNum = channelNum;
 	channels = mChannelNum;
-	mDoNormalize = doNormalize;
 
 	//lets put a cap on the maximum number of channels in case someone used
 	//a completely wrong number
@@ -43,16 +44,9 @@ Receiver::Receiver (unsigned channelNum, bool doNormalize) {
 
 	mValues = (int*)malloc(mChannelNum * sizeof(int));
 	rcValues = mValues;
-//	mValuesNormalized = (double*)malloc(mChannelNum * sizeof(double));
-//	mBias = (int*)malloc(mChannelNum * sizeof(int));
-//	mScalefactor = (int*)malloc(mChannelNum * sizeof(int));
-//
-//	for (unsigned i = 0; i < mChannelNum; i ++) {
-//		mBias[i] = 860;
-//		mScalefactor[i] = 1000;
-//		mValuesNormalized = 0;
-//	}
-
+	for (unsigned i = 0; i < mChannelNum; i++) {
+		rcValues[i] = 0;
+	}
 }
 
 Receiver::~Receiver () {
@@ -62,34 +56,19 @@ Receiver::~Receiver () {
 //	free(mScalefactor);
 }
 
-void Receiver::setup() {
-	attachInterrupt(0, &calc, RISING);
+void Receiver::setup(int interrupt) {
+//	attachInterrupt(interrupt, &calc, RISING);
+	attachInterrupt(interrupt, &calc, FALLING);
 }
 
 int Receiver::getValue(unsigned channel) {
+	int val = 0;
 	if (channel > mChannelNum) {
 		channel = mChannelNum - 1;
 	}
-	return mValues[channel];
+	cli();
+	val = mValues[channel];
+	sei();
+	return val;
 }
 
-//double Receiver::getValueNormalized(unsigned channel) {
-//	if (channel > mChannelNum) {
-//		channel = mChannelNum - 1;
-//	}
-//	return mValuesNormalized[channel];
-//}
-//
-//void Receiver::setScaling(unsigned channel, int scaling) {
-//	if (channel > mChannelNum) {
-//		channel = mChannelNum - 1;
-//	}
-//	mScalefactor[channel] = scaling;
-//}
-//
-//void Receiver::setBias(unsigned channel, int bias) {
-//	if (channel > mChannelNum) {
-//		channel = mChannelNum - 1;
-//	}
-//	mBias[channel] = bias;
-//}
